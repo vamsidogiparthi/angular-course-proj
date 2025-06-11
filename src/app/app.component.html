@@ -2,8 +2,20 @@
 
 <main class="main">
   <ul id="users">
-    <li><app-user /></li>
+    <!-- <li *ngFor="let user of users">
+      <app-user [user]="user" (selectedUser)="onSelectedUserHandler($event)" />
+    </li> -->
+    @for(user of users; track user.id) {
+    <li>
+      <app-user [user]="user" (selectedUser)="onSelectedUserHandler($event)" />
+    </li>
+    }
   </ul>
 
+  @if(selectedUserName() !== "") {
+  <app-tasks [username]="selectedUserName()" />
+  } @else {
+  <p>Select a User to see their tasks</p>
+  }
   <router-outlet />
 </main>

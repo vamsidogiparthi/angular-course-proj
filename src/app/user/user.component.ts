@@ -1,7 +1,18 @@
-import { Component } from '@angular/core';
-import { DUMMY_USERS } from '../../dummy-users';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  input,
+  Output,
+  output,
+} from '@angular/core';
 
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+interface User { // interface allows you to only define object types.
+  id: string;
+  name: string;
+  avatar: string;
+}
 
 @Component({
   selector: 'app-user',
@@ -9,14 +20,20 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  selectedUser = DUMMY_USERS[randomIndex];
+  // @Input({ required: true }) avatar!: string;
+  // @Input({ required: true }) name!: string;
+  // id = input.required<string>();
+  // avatar = input.required<string>();
+  // name = input.required<string>();
+  imagePath = computed(() => `users/${this.user().avatar}`);
+  user = input.required<User>();
+  selectedUser = output<string>(); // this implements type safety.
 
-  get imagePath() {
-    return `users/${this.selectedUser.avatar}`;
-  }
+  // onSelectedUserHandler() {
+  //   this.selectedUser.emit(this.id());
+  // }
 
   onSelectedUserHandler() {
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    this.selectedUser = DUMMY_USERS[randomIndex];
+    this.selectedUser.emit(this.user().id);
   }
 }
