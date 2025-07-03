@@ -7,13 +7,17 @@
     </li> -->
     @for(user of users; track user.id) {
     <li>
-      <app-user [user]="user" (selectedUser)="onSelectedUserHandler($event)" />
+      <app-user
+        [user]="user"
+        [isSelectedUser]="selectedUserId() == user.id"
+        (selectedUser)="onSelectedUserHandler($event)"
+      />
     </li>
     }
   </ul>
 
   @if(selectedUserName() !== "") {
-  <app-tasks [username]="selectedUserName()" />
+  <app-tasks [username]="selectedUserName()" [userId]="selectedUserId()" />
   } @else {
   <p>Select a User to see their tasks</p>
   }

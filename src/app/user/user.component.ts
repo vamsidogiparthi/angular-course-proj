@@ -8,11 +8,7 @@ import {
   output,
 } from '@angular/core';
 
-interface User { // interface allows you to only define object types.
-  id: string;
-  name: string;
-  avatar: string;
-}
+import { User } from './user.model'; // Assuming you have a User model defined
 
 @Component({
   selector: 'app-user',
@@ -27,6 +23,7 @@ export class UserComponent {
   // name = input.required<string>();
   imagePath = computed(() => `users/${this.user().avatar}`);
   user = input.required<User>();
+  isSelectedUser = input.required<boolean>();
   selectedUser = output<string>(); // this implements type safety.
 
   // onSelectedUserHandler() {

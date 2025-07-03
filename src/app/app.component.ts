@@ -8,7 +8,13 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppHeaderComponent, UserComponent, AppTasksComponent, CommonModule],
+  imports: [
+    RouterOutlet,
+    AppHeaderComponent,
+    UserComponent,
+    AppTasksComponent,
+    CommonModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -16,10 +22,12 @@ export class AppComponent {
   title = 'angular-course-proj';
   users = DUMMY_USERS;
   selectedUserName = signal<string>('');
+  selectedUserId = signal<string>('');
 
   onSelectedUserHandler(Id: string) {
     console.log('Selected User ID:', Id);
-
-    this.selectedUserName.set(this.users.find((u) => u.id === Id)?.name ?? '');
+    let user = this.users.find((u) => u.id === Id);
+    this.selectedUserName.set(user?.name ?? '');
+    this.selectedUserId.set(user?.id ?? '');
   }
 }
