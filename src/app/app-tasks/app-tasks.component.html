@@ -17,6 +17,6 @@
   </ul>
 
   @if(isAddingTask()) {
-  <app-add-task (cancelAddingTask)="onCancelAddingTaskEvent()"></app-add-task>
+  <app-add-task (cancelAddingTask)="onCancelAddingTaskEvent()" (addingTask)="onTaskSubmission($event)"></app-add-task>
   }
 </section>

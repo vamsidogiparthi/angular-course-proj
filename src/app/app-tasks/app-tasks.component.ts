@@ -55,6 +55,19 @@ export class AppTasksComponent {
     // Here you would typically open a modal or navigate to a task creation page
   }
 
+  onTaskSubmission({ title, summary, dueDate }: { title: string; summary: string; dueDate: string }) {
+    this.dummyTasks.set([
+      ...this.dummyTasks(),
+      {
+        id: `t${this.dummyTasks().length + 1}`,
+        userId: this.userId(),
+        title: title,
+        summary: summary,
+        dueDate: dueDate, // Current date as due date
+      }]);
+    this.isAddingTask.set(false);
+  }
+
   onCancelAddingTaskEvent() {
     this.isAddingTask.set(false);
     console.log('Adding task cancelled');
